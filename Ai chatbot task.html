@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>Smart Chatbot</title>
+<title>Advanced Chatbot</title>
 <style>
   body {
-    font-family: 'Poppins', 'Segoe UI', sans-serif;
-    background: linear-gradient(135deg, #4e54c8, #8f94fb);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, #1e3c72, #2a5298);
     display: flex;
     justify-content: center;
     align-items: center;
@@ -14,11 +14,10 @@
   }
 
   #chatbot-container {
-    width: 420px;
-    background: rgba(255, 255, 255, 0.8);
-    backdrop-filter: blur(12px);
-    border-radius: 22px;
-    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.25);
+    width: 400px;
+    background: linear-gradient(145deg, #e6e6e6, #ffffff);
+    box-shadow: 10px 10px 20px #a0a0a0, -10px -10px 20px #ffffff;
+    border-radius: 20px;
     padding: 25px;
     display: flex;
     flex-direction: column;
@@ -26,45 +25,43 @@
 
   #chatbot-header {
     text-align: center;
-    margin-bottom: 18px;
+    margin-bottom: 20px;
     font-size: 24px;
-    font-weight: 600;
-    color: #333;
-    letter-spacing: 1px;
+    font-weight: bold;
+    color: #222;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
   }
 
   #chat-area {
     flex-grow: 1;
     overflow-y: auto;
-    background: #fdfdfd;
-    border-radius: 15px;
     padding: 15px;
-    box-shadow: inset 3px 3px 6px #d1d1d1, inset -3px -3px 6px #ffffff;
+    border-radius: 15px;
+    background: linear-gradient(145deg, #ffffff, #e0e0e0);
+    box-shadow: inset 6px 6px 12px #bebebe, inset -6px -6px 12px #ffffff;
     margin-bottom: 15px;
     max-height: 300px;
   }
 
   .message {
     padding: 12px 18px;
-    border-radius: 18px;
+    border-radius: 20px;
     margin-bottom: 10px;
     max-width: 80%;
     word-wrap: break-word;
-    font-size: 15px;
+    box-shadow: 4px 4px 8px #c0c0c0, -4px -4px 8px #ffffff;
     animation: fadeIn 0.3s ease-in-out;
   }
 
   .user-message {
-    background-color: #d9f7d0;
+    background-color: #d1f7c4;
     align-self: flex-end;
     text-align: right;
-    box-shadow: 3px 3px 6px #c0c0c0;
   }
 
   .chatbot-message {
-    background-color: #e0eaff;
+    background-color: #c4e1f7;
     align-self: flex-start;
-    box-shadow: 3px 3px 6px #cfcfcf;
   }
 
   #input-section {
@@ -75,33 +72,27 @@
     flex-grow: 1;
     padding: 12px;
     border: none;
-    border-radius: 25px;
-    outline: none;
-    font-size: 15px;
-    background: #f5f5f5;
-    box-shadow: inset 2px 2px 5px #cfcfcf, inset -2px -2px 5px #ffffff;
+    border-radius: 20px;
     margin-right: 10px;
+    box-shadow: inset 4px 4px 8px #bebebe, inset -4px -4px 8px #ffffff;
   }
 
   #send-button {
-    padding: 12px 24px;
+    padding: 12px 25px;
+    background: linear-gradient(145deg, #007aff, #005bb5);
+    color: black;
     border: none;
-    border-radius: 25px;
-    background: linear-gradient(135deg, #6a5acd, #836fff);
-    color: white;
-    font-weight: 500;
+    border-radius: 20px;
     cursor: pointer;
-    transition: 0.3s ease;
-    box-shadow: 3px 3px 10px rgba(106, 90, 205, 0.4);
+    box-shadow: 6px 6px 12px #0053a0, -6px -6px 12px #0090ff;
   }
 
   #send-button:hover {
-    background: linear-gradient(135deg, #5948b0, #705ff0);
-    transform: translateY(-1px);
+    background: linear-gradient(145deg, #005bb5, #007aff);
   }
 
   @keyframes fadeIn {
-    from { opacity: 0; transform: translateY(8px); }
+    from { opacity: 0; transform: translateY(10px); }
     to { opacity: 1; transform: translateY(0); }
   }
 </style>
@@ -109,10 +100,10 @@
 <body>
 
 <div id="chatbot-container">
-  <div id="chatbot-header">Smart Chatbot 💬</div>
+  <div id="chatbot-header">AI Chatbot</div>
   <div id="chat-area"></div>
   <div id="input-section">
-    <input type="text" id="message-input" placeholder="Type your message..." onkeypress="handleKeyPress(event)">
+    <input type="text" id="message-input" placeholder="Type a message..." onkeypress="handleKeyPress(event)">
     <button id="send-button" onclick="sendMessage()">Send</button>
   </div>
 </div>
@@ -132,23 +123,25 @@
     const lowerInput = userInput.toLowerCase();
 
     const responses = {
-      'hello': 'Hi there! How can I help you today? 😊',
-      'hi': 'Hey! Nice to see you.',
-      'hey': 'Hey! What’s up?',
-      'good morning': 'Good morning! Hope your day is bright and cheerful ☀️',
+      'hello': 'Hello there! How can I assist you today?',
+      'hi': 'Hi! Nice to meet you. 😊',
+      'hey': 'Hey there! How can I help?',
+      'good morning': 'Good morning! Hope you have a great day. ☀️',
       'good afternoon': 'Good afternoon! How’s your day going?',
-      'good evening': 'Good evening! What’s on your mind?',
-      'good night': 'Good night! Sleep tight 🌙',
-      'how are you': 'I’m feeling chatty and ready to help! 😄',
-      'bye': 'Goodbye! Take care 👋',
-      'thank you': "You're most welcome! 💫",
+      'good evening': 'Good evening! What can I do for you?',
+      'good night': 'Good night! Sleep well. 🌙',
+      'how are you': 'I am just a chatbot, but I am functioning well! 😊',
+      'bye': 'Goodbye! Have a great day. 😊',
+      'thank you': "You're welcome! 😊",
       'what is the date today': new Date().toDateString(),
       'what time is it': new Date().toLocaleTimeString(),
-      'tell me a joke': 'Why don’t skeletons fight each other? Because they don’t have the guts! 😂',
-      'fun fact': 'Did you know? Octopuses have three hearts! 🐙'
+      'how was your day': 'I do not have personal experiences, but I am here to chat with you! 😊',
+      'what’s for dinner': 'I do not eat, but I hope you have a delicious meal! 🍽️',
+      'tell me a joke': 'Why did the scarecrow win an award? Because he was outstanding in his field! 😂',
+      'tell me a fun fact': 'Did you know? Honey never spoils. Archaeologists have found pots of honey in ancient Egyptian tombs that are over 3000 years old and still perfectly edible!'
     };
 
-    return responses[lowerInput] || "Hmm, I’m not sure about that — could you rephrase?";
+    return responses[lowerInput] || "I'm not sure about that. Try asking something else!";
   }
 
   function displayMessage(message, className) {
